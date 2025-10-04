@@ -81,6 +81,19 @@ for i, texto in enumerate(botones_textos):
     y = inicio_y + i * (boton_alto + espaciado)
     botones.append(Boton(x, y, boton_ancho, boton_alto, texto, CREMA, AZUL, fuente))
 
+def iniciar_partida(ventana, ancho, alto, fuente):
+    """Escena temporal de iniciar partida"""
+    ventana.fill((30, 60, 120))
+    texto = "Se está trabajando en esta función..."
+    texto_render = fuente.render(texto, True, (255, 240, 200))
+    ventana.blit(
+        texto_render,
+        ((ancho - texto_render.get_width()) // 2,
+         (alto - texto_render.get_height()) // 2)
+    )
+    pygame.display.update()
+    pygame.time.wait(2000)
+
 corriendo = True
 while corriendo:
     for evento in pygame.event.get():
@@ -98,6 +111,8 @@ while corriendo:
                         print(f"Botón {boton.texto} presionado")
                         if boton.texto == "Salir":
                             corriendo = False
+                        if boton.texto == "Iniciar":
+                            iniciar_partida(ventana, ANCHO, ALTO, fuente)
 
     ventana.blit(fondo, (0, 0))
     
