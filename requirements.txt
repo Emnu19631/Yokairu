@@ -1,0 +1,4 @@
+pygame
+json
+numpy
+requests
