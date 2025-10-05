@@ -1,8 +1,13 @@
 import pygame
 import os
 import ctypes
+import sys
+from inicio.guardar import guardar_partida, cargar_partida, iniciar_juego
 
-BASE_DIR = os.path.dirname(__file__)
+pygame.init()  # <-- AGREGA ESTA LÍNEA AQUÍ
+
+# Obtén la ruta absoluta de la carpeta donde está este archivo
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def cargar_imagen(nombre, ancho=None, alto=None):
     ruta = os.path.join(BASE_DIR, "images", nombre)
@@ -11,8 +16,10 @@ def cargar_imagen(nombre, ancho=None, alto=None):
         imagen = pygame.transform.scale(imagen, (ancho, alto))
     return imagen
 
-def cargar_audio(nombre):
-    ruta = os.path.join(BASE_DIR, "audio", nombre)
+def cargar_audio(nombre_archivo):
+    ruta = os.path.join(BASE_DIR, "audio", nombre_archivo)
+    if not pygame.mixer.get_init():
+        pygame.mixer.init()
     pygame.mixer.music.load(ruta)
     return ruta
 
@@ -54,7 +61,70 @@ class Boton:
         return self.rect.collidepoint(pos)
 
 
-pygame.init()
+def mostrar_menu():
+    pygame.init()
+    pantalla = pygame.display.set_mode((800, 484))
+    pygame.display.set_caption("YOKAIRYU")
+
+    fondo = pygame.image.load("ruta/a/tu/fondo.png")  # Usa tu fondo real
+    fuente_titulo = pygame.font.SysFont("Arial", 90, bold=True)
+    fuente_boton = pygame.font.SysFont("Arial", 38, bold=True)
+
+    botones = [
+        {"texto": "Iniciar", "color": (173, 194, 255)},
+        {"texto": "Cargar", "color": (173, 194, 255)},
+        {"texto": "Tutorial", "color": (255, 245, 180)},
+        {"texto": "Créditos", "color": (255, 245, 180)},
+        {"texto": "Salir", "color": (255, 245, 180)},
+    ]
+
+    progreso = {"nivel": 1, "puntos": 0}
+    running = True
+
+    while running:
+        pantalla.blit(fondo, (0, 0))
+        # Título
+        texto_titulo = fuente_titulo.render("Yokairyu", True, (50, 60, 120))
+        pantalla.blit(texto_titulo, (120, 40))
+
+        # Botones
+        y_base = 140
+        rects = []
+        for i, boton in enumerate(botones):
+            rect = pygame.Rect(250, y_base + i * 70, 300, 55)
+            rects.append(rect)
+            pygame.draw.rect(pantalla, boton["color"], rect, border_radius=25)
+            texto = fuente_boton.render(boton["texto"], True, (100, 140, 255) if i < 2 else (100, 120, 140))
+            pantalla.blit(texto, (rect.x + 60, rect.y + 8))
+
+        pygame.display.flip()
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                guardar_partida(progreso)
+                running = False
+
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                pos = pygame.mouse.get_pos()
+                for i, rect in enumerate(rects):
+                    if rect.collidepoint(pos):
+                        if i == 0:  # Iniciar
+                            iniciar_juego()
+                        elif i == 1:  # Cargar
+                            data = cargar_partida()
+                            if data:
+                                # Aquí puedes actualizar el progreso o mostrar mensaje
+                                print("Partida cargada:", data)
+                        elif i == 2:  # Tutorial
+                            pass  # Aquí tu lógica de tutorial
+                        elif i == 3:  # Créditos
+                            pass  # Aquí tu lógica de créditos
+                        elif i == 4:  # Salir
+                            guardar_partida(progreso)
+                            pygame.quit()
+                            sys.exit()
+    pygame.quit()
+    sys.exit()
 
 ANCHO_IMAGEN = 1920
 ALTO_IMAGEN = 1080
@@ -84,7 +154,7 @@ boton_ancho = 220
 boton_alto = 50
 espaciado = 15
 inicio_y = 180
-botones_textos = ["Iniciar", "Tutorial", "Créditos", "Salir"]
+botones_textos = ["Iniciar", "Cargar", "Créditos", "Salir"]
 
 botones = []
 for i, texto in enumerate(botones_textos):
@@ -169,3 +239,6 @@ while corriendo:
 
 pygame.mixer.music.stop()
 pygame.quit()
+
+# Código para iniciar el juego
+iniciar_juego()
