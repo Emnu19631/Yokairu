@@ -1,7 +1,7 @@
 import pygame
 import sys
 from guardar import guardar_partida, cargar_partida
-from iniciar_partida import iniciar_partida
+from iniciar_partida import iniciar_partida 
 from boton import Boton
 from config import (
     ventana, fondo, ANCHO, ALTO, ANCHO_BASE, PROPORCION, ALTO_BASE,
@@ -64,6 +64,7 @@ while corriendo:
         elif evento.type == pygame.VIDEORESIZE:
             # Ajustar resolución dinámica
             ANCHO, ALTO = evento.size
+            # Asegura mantener la proporción
             ALTO = int(ANCHO / PROPORCION)
             actualizar_resolucion(ANCHO, ALTO)
             ventana = pygame.display.set_mode((ANCHO, ALTO), pygame.RESIZABLE)
@@ -83,8 +84,10 @@ while corriendo:
                     corriendo = False
 
                 elif texto == "Iniciar":
-                    iniciar_partida(ventana, ANCHO, ALTO, fuente)
-
+                    # === CAMBIO CLAVE AQUÍ: MANEJO DEL RESULTADO DE iniciar_partida (Teclado) ===
+                    resultado = iniciar_partida(ventana, ANCHO, ALTO, fuente)
+                    if resultado == "salir":
+                        corriendo = False
                 elif texto == "Ajustes":
                     resultado = pantalla_ajustes(fuente)
                     if isinstance(resultado, tuple):
@@ -96,7 +99,6 @@ while corriendo:
                         accion = resultado
                     if accion == "salir":
                         corriendo = False
-
         elif evento.type == pygame.MOUSEMOTION:
             for i, boton in enumerate(botones):
                 if boton.rect.collidepoint(evento.pos):
@@ -115,8 +117,10 @@ while corriendo:
                             corriendo = False
 
                         elif texto == "Iniciar":
-                            iniciar_partida(ventana, ANCHO, ALTO, fuente)
-
+                            # === CAMBIO CLAVE AQUÍ: MANEJO DEL RESULTADO DE iniciar_partida (Ratón) ===
+                            resultado = iniciar_partida(ventana, ANCHO, ALTO, fuente)
+                            if resultado == "salir":
+                                corriendo = False
                         elif texto == "Ajustes":
                             resultado = pantalla_ajustes(fuente)
                             if isinstance(resultado, tuple):
