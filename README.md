@@ -45,9 +45,9 @@ yoka/
 - **Pygame** (instalable con pip)
 
 Instalación:
-
+```bash
 pip install pygame
-
+```
 
 ---
 
@@ -55,8 +55,9 @@ pip install pygame
 
 Desde la carpeta raíz del proyecto:
 
+```bash
 python src/main.py
-
+```
 
 ---
 
@@ -65,7 +66,6 @@ python src/main.py
 - Sistema narrativo con texto progresivo tipo *visual novel*  
 - Interfaz de usuario adaptativa con botones y efectos hover  
 - Ajustes de volumen y pantalla completa  
-- Sistema de guardado automático  
 - Transiciones visuales entre fondos e imágenes
 
 ---
