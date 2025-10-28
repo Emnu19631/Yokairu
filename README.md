@@ -35,3 +35,42 @@ yoka/
 │   └── main.py               # Punto de entrada principal
 │
 └── README.md
+```
+
+---
+
+## Requisitos
+
+- **Python 3.10** o superior  
+- **Pygame** (instalable con pip)
+
+Instalación:
+
+pip install pygame
+
+
+---
+
+## Ejecución del Juego
+
+Desde la carpeta raíz del proyecto:
+
+python src/main.py
+
+
+---
+
+## Características Principales
+
+- Sistema narrativo con texto progresivo tipo *visual novel*  
+- Interfaz de usuario adaptativa con botones y efectos hover  
+- Ajustes de volumen y pantalla completa  
+- Sistema de guardado automático  
+- Transiciones visuales entre fondos e imágenes
+
+---
+
+## Créditos
+
+Proyecto desarrollado con **Python + Pygame**  
+Diseño de interfaz, narrativa y lógica implementados para el juego **YOKAIRYU**.
