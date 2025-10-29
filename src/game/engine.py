@@ -58,18 +58,34 @@ def manejar_texto_y_botones(slide, ventana, fuente, fondo, boton_inicio, boton_a
 # ELECCIONES Y EVENTOS
 # ===============================
 
+def ajustar_tamano_boton_y_fuente(texto, ancho_base=200, alto_base=50, fuente_base=24):
+    largo = len(texto)
+    if largo > 20:
+        escala = min(1.0, 20 / largo)
+        ancho = int(ancho_base * (1 + (1 - escala) * 0.6))
+        alto = int(alto_base * (1 + (1 - escala) * 0.5))
+        fuente_tam = int(fuente_base * escala * 0.9)
+    else:
+        ancho, alto, fuente_tam = ancho_base, alto_base, fuente_base
+    return ancho, alto, fuente_tam
+
+
+
 def manejar_opciones(slide, fuente, ancho, alto):
     opciones = slide["opciones"]
     layout = slide.get("layout", "horizontal")
     botones_opciones = []
     rect_opciones = pygame.Rect(50, alto - 160, ancho - 100, 150)
     color_fondo = (234, 210, 146)
+
     if layout == "horizontal":
         espacio_total = len(opciones) * 200 + (len(opciones) - 1) * 40
         inicio_x = ancho // 2 - espacio_total // 2
         y = alto - 100
         for i, opcion in enumerate(opciones):
-            boton = Boton(inicio_x + i * 240, y, 200, 50, opcion["texto"], CREMA, AZUL, fuente, color_hover=AZUL_RESALTADO)
+            boton_ancho, boton_alto, fuente_tam = ajustar_tamano_boton_y_fuente(opcion["texto"])
+            fuente_boton = pygame.font.SysFont("Arial", fuente_tam, bold=True)
+            boton = Boton(inicio_x + i * 240, y, boton_ancho, boton_alto, opcion["texto"], CREMA, AZUL, fuente_boton, color_hover=AZUL_RESALTADO)
             botones_opciones.append((boton, opcion["next"]))
     else:
         boton_ancho, boton_alto, espacio = 180, 45, 20
@@ -84,9 +100,13 @@ def manejar_opciones(slide, fuente, ancho, alto):
             (inicio_x + boton_ancho + espacio, inicio_y + boton_alto + espacio)
         ]
         for opcion, pos in zip(opciones, posiciones):
-            boton = Boton(pos[0], pos[1], boton_ancho, boton_alto, opcion["texto"], CREMA, AZUL, fuente, color_hover=AZUL_RESALTADO)
+            boton_ancho, boton_alto, fuente_tam = ajustar_tamano_boton_y_fuente(opcion["texto"], 180, 45, 24)
+            fuente_boton = pygame.font.SysFont("Arial", fuente_tam, bold=True)
+            boton = Boton(pos[0], pos[1], boton_ancho, boton_alto, opcion["texto"], CREMA, AZUL, fuente_boton, color_hover=AZUL_RESALTADO)
             botones_opciones.append((boton, opcion["next"]))
+
     return botones_opciones, rect_opciones, color_fondo
+
 
 def esperar_eleccion(ventana, fondo, img, pos, botones_opciones, rect_opciones, color_fondo, boton_inicio, boton_ajustes, slide_index):
     while True:
