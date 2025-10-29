@@ -77,6 +77,7 @@ HISTORIA = [
     {
         "tipo": "narracion",
         "fondo": BACKGROUND_JUEGO,
+        
         "texto": (
             "Hola! Veo que estás un poco perdida, necesitas ayuda? "
             "Y lo siento por la gente de aquí, a mi tampoco me hacen caso sinceramente, "
@@ -87,19 +88,25 @@ HISTORIA = [
         "pos_rel": (0.35, 0.15)
     },
     {
-        "tipo": "narracion",
+        "tipo": "eleccion",
         "fondo": BACKGROUND_JUEGO,
         "transicion_fondos": [
             "slide5-01.jpg", "slide5-02.jpg", "slide5-03.jpg",
-            "slide5-04.jpg", "slide5-05.jpg", "slide5-06.jpg", "slide5-07.jpg"
+            "slide5-04.jpg", "slide5-05.jpg", "slide5-06.jpg", BACKGROUND_JUEGO
         ],
         "texto": (
-            "Hola! Veo que estás un poco perdida, necesitas ayuda? "
-            "Y lo siento por la gente de aquí, a mi tampoco me hacen caso sinceramente, "
-            "oh, me llamo Rayco por cierto, es un placer"
+            "(Así que la persona frente a mí se llamaba Rayco, era bueno saber eso. "
+            "Ahora podría responder algunas de mis dudas... ¿con qué debería comenzar?)"
         ),
-        "imagen": "rayco_silueta.png",
+        "imagen": "rayco_oc.png",
         "scalar": 0.4,
-        "pos_rel": (0.35, 0.15)
+        "pos_rel": (0.35, 0.15),
+        "opciones": [
+            {"texto": "¿Dónde estamos?", "next": 8},
+            {"texto": "¿Cómo regreso a mi casa?", "next": 9},
+        ],
+
     }
+
+
 ]
