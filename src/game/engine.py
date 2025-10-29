@@ -191,7 +191,10 @@ def procesar_narracion(slide, ventana, fuente, fondo_actual, boton_inicio, boton
                                      boton_inicio, boton_ajustes, ancho, alto, img, pos, slide_index)
     if accion:
         return accion, slide_index
+    if "next" in slide:
+        return None, slide["next"]
     return None, slide_index + 1
+
 
 def procesar_eleccion(slide, ventana, fuente, fondo_actual, boton_inicio, boton_ajustes, ancho, alto, slide_index):
     img, pos = cargar_y_dibujar_imagen(slide, ventana, ancho, alto)

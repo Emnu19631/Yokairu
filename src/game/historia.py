@@ -54,9 +54,9 @@ HISTORIA = [
         "layout": "2x2",
         "opciones": [
             {"texto": "Al pueblo", "next": 4},
-            {"texto": "A la isla", "next": 5},
-            {"texto": "Al prado", "next": 6},
-            {"texto": "Al volcán", "next": 7},
+            {"texto": "A la isla", "next": None},
+            {"texto": "Al prado", "next": None},
+            {"texto": "Al volcán", "next": None},
         ],
     },
     {
@@ -102,11 +102,60 @@ HISTORIA = [
         "scalar": 0.4,
         "pos_rel": (0.35, 0.15),
         "opciones": [
-            {"texto": "¿Dónde estamos?", "next": 8},
+            {"texto": "¿Dónde estamos?", "next": 7},
             {"texto": "¿Cómo regreso a mi casa?", "next": 9},
         ],
-
-    }
-
-
+    },
+    {
+        "tipo": "narracion",
+        "fondo": BACKGROUND_JUEGO,
+        "texto": (
+            "¿Con que quieres saber dónde estamos o qué es este lugar? Bueno, estamos en Yokairyu. "
+            "Este es un mundo especial, aquí existe la magia y hay mucho por explorar. "
+            "Sí, sé lo que estás pensando... ¿no se supone que Yokairyu es un juego? "
+            "Pues sí, pero también es otro mundo, un mundo algo…"
+        ),
+        "imagen": "rayco_oa.png",
+        "scalar": 0.4,
+        "pos_rel": (0.35, 0.15)
+    },
+    {
+        "tipo": "narracion",
+        "fondo": BACKGROUND_JUEGO,
+        "texto": (
+            "Especial. Descuida, con el tiempo te vas a acostumbrar a este lugar, te lo prometo. "
+            "A mí también me costó un poco al principio, pero mi jefa me ayudó. "
+            "De hecho, te voy a llevar con ella, vamos. "
+            "(Luego de eso, agarró mi mano y me llevó con él.)"
+        ),
+        "imagen": "rayco_estr.png",
+        "scalar": 0.4,
+        "pos_rel": (0.35, 0.15),
+        "next": 10
+    },
+    {
+        "tipo": "narracion",
+        "fondo": BACKGROUND_JUEGO,
+        "transicion_fondos": [
+            "slide5-01.jpg", "slide5-02.jpg", "slide5-03.jpg",
+            "slide5-04.jpg", "slide5-05.jpg", "slide5-06.jpg", "slide5-07.jpg"
+        ],
+        "texto": (
+            "¿Regresar a tu casa? Eso es algo complicado... no sabría decirte cómo hacerlo, "
+            "pero mi jefa puede ayudarte. Vamos, te llevaré con ella. "
+            "(Dijo y empezamos a caminar por el pueblo en busca de su jefa.)"
+        ),
+        "imagen": "rayco_oc.png",
+        "scalar": 0.4,
+        "pos_rel": (0.35, 0.15)
+    },
+    {
+        "tipo": "narracion",
+        "fondo": BACKGROUND_JUEGO,
+        "texto": (
+            "(Después de un rato caminando con Rayco llegamos con "
+            "una chica que por algún motivo se me hacia conocida "
+            "aunque probablemente solo era mi imaginacion)"
+        ),
+    },
 ]
