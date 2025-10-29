@@ -71,7 +71,7 @@ def ajustar_tamano_boton_y_fuente(texto, ancho_base=200, alto_base=50, fuente_ba
 
 
 
-def manejar_opciones(slide, fuente, ancho, alto):
+def manejar_opciones(slide, ancho, alto):
     opciones = slide["opciones"]
     layout = slide.get("layout", "horizontal")
     botones_opciones = []
@@ -204,7 +204,7 @@ def procesar_eleccion(slide, ventana, fuente, fondo_actual, boton_inicio, boton_
                                      boton_inicio, boton_ajustes, ancho, alto, img, pos, slide_index)
     if accion:
         return accion, slide_index
-    botones_opciones, rect_opciones, color_fondo = manejar_opciones(slide, fuente, ancho, alto)
+    botones_opciones, rect_opciones, color_fondo = manejar_opciones(slide, ancho, alto)
     accion = esperar_eleccion(ventana, fondo_actual, img, pos,
                               botones_opciones, rect_opciones, color_fondo,
                               boton_inicio, boton_ajustes, slide_index)

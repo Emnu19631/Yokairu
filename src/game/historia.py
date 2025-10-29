@@ -8,6 +8,13 @@ from core.render import mostrar_texto_tipeado_con_fondo_solido
 # ===============================
 
 BACKGROUND_JUEGO = "background_juego.jpg"
+SLIDE_5_01 = "slide5-01.jpg"
+SLIDE_5_02 = "slide5-02.jpg"
+SLIDE_5_03 = "slide5-03.jpg"
+SLIDE_5_04 = "slide5-04.jpg"
+SLIDE_5_05 = "slide5-05.jpg"
+SLIDE_5_06 = "slide5-06.jpg"
+SLIDE_5_07 = "slide5-07.jpg"
 
 # ===============================
 # HISTORIA PRINCIPAL
@@ -63,8 +70,8 @@ HISTORIA = [
         "tipo": "narracion",
         "fondo": BACKGROUND_JUEGO,
         "transicion_fondos": [
-            "slide5-01.jpg", "slide5-02.jpg", "slide5-03.jpg",
-            "slide5-04.jpg", "slide5-05.jpg", "slide5-06.jpg", "slide5-07.jpg"
+            SLIDE_5_01, SLIDE_5_02, SLIDE_5_03,
+            SLIDE_5_04, SLIDE_5_05, SLIDE_5_06, SLIDE_5_07
         ],
         "texto": (
             "Decidí ir al pueblo, supuse que allí encontraría mucha gente a la cual pedirle ayuda. "
@@ -91,8 +98,8 @@ HISTORIA = [
         "tipo": "eleccion",
         "fondo": BACKGROUND_JUEGO,
         "transicion_fondos": [
-            "slide5-01.jpg", "slide5-02.jpg", "slide5-03.jpg",
-            "slide5-04.jpg", "slide5-05.jpg", "slide5-06.jpg", BACKGROUND_JUEGO
+            SLIDE_5_01, SLIDE_5_02, SLIDE_5_03,
+            SLIDE_5_04, SLIDE_5_05, SLIDE_5_06, SLIDE_5_07
         ],
         "texto": (
             "(Así que la persona frente a mí se llamaba Rayco, era bueno saber eso. "
@@ -137,8 +144,8 @@ HISTORIA = [
         "tipo": "narracion",
         "fondo": BACKGROUND_JUEGO,
         "transicion_fondos": [
-            "slide5-01.jpg", "slide5-02.jpg", "slide5-03.jpg",
-            "slide5-04.jpg", "slide5-05.jpg", "slide5-06.jpg", "slide5-07.jpg"
+            SLIDE_5_01, SLIDE_5_02, SLIDE_5_03,
+            SLIDE_5_04, SLIDE_5_05, SLIDE_5_06, SLIDE_5_07
         ],
         "texto": (
             "¿Regresar a tu casa? Eso es algo complicado... no sabría decirte cómo hacerlo, "
