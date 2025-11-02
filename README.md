@@ -25,7 +25,8 @@ yoka/
 │   ├── ui/
 │   │   ├── boton.py          # Clase de botones interactivos
 │   │   ├── ajustes.py        # Pantalla de configuración (volumen y pantalla completa)
-│   │   └── menu.py           # Menú principal de inicio
+│   │   ├── menu.py           # Menú principal de inicio
+|   |   └── cargar.py         # Pantalla de carga
 │   │
 │   ├── game/
 │   │   ├── historia.py       # Contiene las escenas y narraciones del juego

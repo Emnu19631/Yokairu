@@ -3,6 +3,7 @@ from ui.boton import Boton
 from core.config import ANCHO, ALTO, cargar_imagen, CREMA, AZUL, BLANCO, AZUL_RESALTADO, PANTALLA_COMPLETA
 from core.render import mostrar_texto_tipeado_con_fondo_solido
 from game.historia import HISTORIA
+from game.save_system import guardar_partida
 
 # ===============================
 # BOTONES DE NAVEGACIÓN
@@ -163,6 +164,12 @@ def ejecutar_novela(ventana, fuente, ancho, alto, slide_inicial=0):
         else:
             accion = None
         if accion in ["inicio", "salir"] or (isinstance(accion, str) and accion.startswith("ajustes")):
+            # guardado automático: guarda el slide actual (slide_index)
+            try:
+                guardar_partida(slide_index)
+            except Exception:
+                # en caso de error en guardado, no bloquear el juego
+                pass
             return accion
     return "menu"
 

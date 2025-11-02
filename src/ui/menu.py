@@ -1,6 +1,6 @@
 import pygame
 import sys
-from game.save_system import guardar_partida, cargar_partida
+from game.save_system import listar_guardados, cargar_partida_por_id
 from ui.boton import Boton
 from core.config import (
     ventana, fondo, ANCHO, ALTO, ANCHO_BASE, PROPORCION, ALTO_BASE,
@@ -9,6 +9,8 @@ from core.config import (
 )
 from ui.ajustes import pantalla_ajustes
 from game.engine import ejecutar_novela
+from ui.cargar import pantalla_cargar
+
 
 # ===============================
 # CONFIGURACIÓN INICIAL
@@ -112,6 +114,34 @@ while corriendo:
                                 estado = f"historia:{indice}"
                         else:
                             continuar = False
+                elif texto == "Cargar":
+                    # abrir pantalla de carga (retorna slide o None)
+                    seleccionado = pantalla_cargar(fuente)
+                    if seleccionado is not None:
+                        estado = f"historia:{seleccionado}"
+                        continuar = True
+                        while continuar and estado.startswith("historia"):
+                            partes = estado.split(":")
+                            slide_guardado = int(partes[1]) if len(partes) > 1 else 0
+                            resultado = ejecutar_novela(ventana, fuente, ANCHO, ALTO, slide_guardado)
+                            if resultado == "salir":
+                                corriendo = False
+                                continuar = False
+                            elif resultado.startswith("ajustes"):
+                                _, indice = resultado.split(":")
+                                resultado_ajustes = pantalla_ajustes(fuente)
+                                if isinstance(resultado_ajustes, tuple):
+                                    accion, ventana, ANCHO, ALTO = resultado_ajustes
+                                    actualizar_resolucion(ANCHO, ALTO)
+                                    fondo = cargar_imagen(BACKGROUND_INICIO, ANCHO, ALTO)
+                                    botones = crear_botones()
+                                if accion == "salir":
+                                    corriendo = False
+                                    continuar = False
+                                else:
+                                    estado = f"historia:{indice}"
+                            else:
+                                continuar = False
                 elif texto == "Ajustes":
                     resultado = pantalla_ajustes(fuente)
                     if isinstance(resultado, tuple):
@@ -160,6 +190,33 @@ while corriendo:
                                     estado = f"historia:{indice}"
                             else:
                                 continuar = False
+                    elif texto == "Cargar":
+                        seleccionado = pantalla_cargar(fuente)
+                        if seleccionado is not None:
+                            estado = f"historia:{seleccionado}"
+                            continuar = True
+                            while continuar and estado.startswith("historia"):
+                                partes = estado.split(":")
+                                slide_guardado = int(partes[1]) if len(partes) > 1 else 0
+                                resultado = ejecutar_novela(ventana, fuente, ANCHO, ALTO, slide_guardado)
+                                if resultado == "salir":
+                                    corriendo = False
+                                    continuar = False
+                                elif resultado.startswith("ajustes"):
+                                    _, indice = resultado.split(":")
+                                    resultado_ajustes = pantalla_ajustes(fuente)
+                                    if isinstance(resultado_ajustes, tuple):
+                                        accion, ventana, ANCHO, ALTO = resultado_ajustes
+                                        actualizar_resolucion(ANCHO, ALTO)
+                                        fondo = cargar_imagen(BACKGROUND_INICIO, ANCHO, ALTO)
+                                        botones = crear_botones()
+                                    if accion == "salir":
+                                        corriendo = False
+                                        continuar = False
+                                    else:
+                                        estado = f"historia:{indice}"
+                                else:
+                                    continuar = False
                     elif texto == "Ajustes":
                         resultado = pantalla_ajustes(fuente)
                         if isinstance(resultado, tuple):
