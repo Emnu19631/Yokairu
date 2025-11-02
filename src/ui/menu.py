@@ -9,6 +9,7 @@ from core.config import (
 )
 from ui.ajustes import pantalla_ajustes
 from game.engine import ejecutar_novela
+import game.engine as engine
 from ui.cargar import pantalla_cargar
 
 
@@ -90,6 +91,8 @@ while corriendo:
                 if texto == "Salir":
                     corriendo = False
                 elif texto == "Iniciar":
+                    from game import engine
+                    engine.id_actual_save = None
                     estado = "historia:0"
                     continuar = True
                     while continuar and estado.startswith("historia"):
@@ -118,8 +121,14 @@ while corriendo:
                     # abrir pantalla de carga (retorna slide o None)
                     seleccionado = pantalla_cargar(fuente)
                     if seleccionado is not None:
-                        estado = f"historia:{seleccionado}"
+                        from game import engine
+                        engine.id_actual_save = seleccionado
+                        from game.save_system import cargar_partida_por_id
+                        slot = cargar_partida_por_id(seleccionado)
+                        slide_guardado = int(slot.get("slide", 0)) if slot else 0
+                        estado = f"historia:{slide_guardado}"
                         continuar = True
+
                         while continuar and estado.startswith("historia"):
                             partes = estado.split(":")
                             slide_guardado = int(partes[1]) if len(partes) > 1 else 0
@@ -166,6 +175,8 @@ while corriendo:
                     if texto == "Salir":
                         corriendo = False
                     elif texto == "Iniciar":
+                        from game import engine
+                        engine.id_actual_save = None
                         estado = "historia:0"
                         continuar = True
                         while continuar and estado.startswith("historia"):
@@ -193,7 +204,12 @@ while corriendo:
                     elif texto == "Cargar":
                         seleccionado = pantalla_cargar(fuente)
                         if seleccionado is not None:
-                            estado = f"historia:{seleccionado}"
+                            from game import engine
+                            engine.id_actual_save = seleccionado
+                            from game.save_system import cargar_partida_por_id
+                            slot = cargar_partida_por_id(seleccionado)
+                            slide_guardado = int(slot.get("slide", 0)) if slot else 0
+                            estado = f"historia:{slide_guardado}"
                             continuar = True
                             while continuar and estado.startswith("historia"):
                                 partes = estado.split(":")

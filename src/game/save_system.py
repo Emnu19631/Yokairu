@@ -14,7 +14,7 @@ def _leer_todos():
             if isinstance(data, list):
                 return data
             return []
-    except (json.JSONDecodeError, ValueError):
+    except json.JSONDecodeError:
         # archivo corrupto -> tratar como sin saves
         return []
 
@@ -23,11 +23,21 @@ def _escribir_todos(lista):
     with open(SAVE_PATH, "w", encoding="utf-8") as f:
         json.dump(lista, f, indent=4, ensure_ascii=False)
 
-def guardar_partida(slide_index):
-    """Agrega un nuevo slot con timestamp y id incremental."""
+def guardar_partida(slide_index, id_existente=None):
     lista = _leer_todos()
-    next_id = max([item.get("id", 0) for item in lista], default=0) + 1
     ahora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    # ✅ Si existe, actualizar el guardado
+    if id_existente is not None:
+        for item in lista:
+            if item.get("id") == id_existente:
+                item["slide"] = int(slide_index)
+                item["fecha"] = ahora
+                _escribir_todos(lista)
+                return item
+
+    # ✅ Si no existe, crear nuevo
+    next_id = max([item.get("id", 0) for item in lista], default=0) + 1
     nuevo = {
         "id": next_id,
         "slide": int(slide_index),
@@ -36,6 +46,8 @@ def guardar_partida(slide_index):
     lista.append(nuevo)
     _escribir_todos(lista)
     return nuevo
+
+
 
 def listar_guardados():
     """Devuelve la lista completa ordenada por fecha (más reciente al final)."""

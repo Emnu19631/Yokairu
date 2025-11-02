@@ -5,6 +5,9 @@ from core.render import mostrar_texto_tipeado_con_fondo_solido
 from game.historia import HISTORIA
 from game.save_system import guardar_partida
 
+id_actual_save = None
+
+
 # ===============================
 # BOTONES DE NAVEGACIÓN
 # ===============================
@@ -155,22 +158,30 @@ def ejecutar_novela(ventana, fuente, ancho, alto, slide_inicial=0):
     while slide_index < len(HISTORIA):
         slide = HISTORIA[slide_index]
         fondo_actual = preparar_fondo(slide, ventana, ancho, alto)
+
+        # 💾 Guardar siempre la slide actual que se está mostrando
+        global id_actual_save
+        try:
+            slot = guardar_partida(slide_index, id_existente=id_actual_save)
+            id_actual_save = slot["id"]
+        except Exception:
+            pass
+
         if slide["tipo"] == "narracion":
             accion, slide_index = procesar_narracion(slide, ventana, fuente, fondo_actual,
-                                                     boton_inicio, boton_ajustes, ancho, alto, slide_index)
+                                                    boton_inicio, boton_ajustes, ancho, alto, slide_index)
         elif slide["tipo"] == "eleccion":
             accion, slide_index = procesar_eleccion(slide, ventana, fuente, fondo_actual,
                                                     boton_inicio, boton_ajustes, ancho, alto, slide_index)
         else:
             accion = None
+
         if accion in ["inicio", "salir"] or (isinstance(accion, str) and accion.startswith("ajustes")):
-            # guardado automático: guarda el slide actual (slide_index)
-            try:
-                guardar_partida(slide_index)
-            except Exception:
-                # en caso de error en guardado, no bloquear el juego
-                pass
             return accion
+
+
+
+
     return "menu"
 
 # ===============================
@@ -215,7 +226,10 @@ def procesar_eleccion(slide, ventana, fuente, fondo_actual, boton_inicio, boton_
     accion = esperar_eleccion(ventana, fondo_actual, img, pos,
                               botones_opciones, rect_opciones, color_fondo,
                               boton_inicio, boton_ajustes, slide_index)
-    return accion, accion
+    if isinstance(accion, int):
+        return None, accion
+    return accion, slide_index
+
 
 # ===============================
 # TEXTO CON BOTONES VISIBLES
