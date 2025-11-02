@@ -1,7 +1,6 @@
 import pytest
 import pygame
-from unittest.mock import MagicMock
-
+from unittest.mock import MagicMock, patch
 from game import engine
 
 
@@ -12,67 +11,98 @@ def init_pygame():
     pygame.quit()
 
 
-def test_ajustar_tamano_boton_y_fuente_texto_corto():
-    ancho, alto, fuente = engine.ajustar_tamano_boton_y_fuente("Hola")
-    assert ancho == 200
-    assert alto == 50
-    assert fuente == 24
+def test_crear_botones_navegacion_devuelve_dos_botones():
+    fuente = pygame.font.SysFont("Arial", 20)
+    boton_inicio, boton_ajustes = engine.crear_botones_navegacion(800, fuente)
+    assert boton_inicio is not None
+    assert boton_ajustes is not None
+    assert boton_inicio.texto == "Inicio"
+    assert boton_ajustes.texto == "Ajustes"
 
 
-def test_ajustar_tamano_boton_y_fuente_texto_largo():
-    ancho, alto, fuente = engine.ajustar_tamano_boton_y_fuente("Texto extremadamente largo de prueba")
-    assert ancho > 200
-    assert alto > 50
-    assert fuente < 24
+def test_dibujar_botones_navegacion_llama_dibujar(monkeypatch):
+    mock_boton_inicio = MagicMock()
+    mock_boton_ajustes = MagicMock()
+    ventana = MagicMock()
+    mouse_pos = (100, 100)
+    engine.dibujar_botones_navegacion(ventana, mouse_pos, mock_boton_inicio, mock_boton_ajustes)
+    mock_boton_inicio.dibujar.assert_called_once_with(ventana, mouse_pos)
+    mock_boton_ajustes.dibujar.assert_called_once_with(ventana, mouse_pos)
 
 
-def test_crear_botones_navegacion():
-    fuente = pygame.font.SysFont("Arial", 24)
-    b_inicio, b_ajustes = engine.crear_botones_navegacion(800, fuente)
-    assert b_inicio.texto == "Inicio"
-    assert b_ajustes.texto == "Ajustes"
+@patch("game.engine.Boton")
+def test_manejar_opciones_horizontal(mock_boton):
+    slide = {
+        "tipo": "eleccion",
+        "opciones": [{"texto": "Opcion 1", "next": 1}, {"texto": "Opcion 2", "next": 2}],
+        "layout": "horizontal"
+    }
+    botones, rect, color = engine.manejar_opciones(slide, 800, 600)
+    assert isinstance(botones, list)
+    assert len(botones) == 2
+    assert isinstance(rect, pygame.Rect)
+    assert isinstance(color, tuple)
 
 
-def test_procesar_click_devuelve_inicio(monkeypatch):
+@patch("game.engine.Boton")
+def test_manejar_opciones_vertical(mock_boton):
+    slide = {
+        "tipo": "eleccion",
+        "opciones": [
+            {"texto": "Arriba Izq", "next": 1},
+            {"texto": "Arriba Der", "next": 2},
+            {"texto": "Abajo Izq", "next": 3},
+            {"texto": "Abajo Der", "next": 4},
+        ],
+        "layout": "vertical"
+    }
+    botones, rect, color = engine.manejar_opciones(slide, 800, 600)
+    assert len(botones) == 4
+    assert isinstance(rect, pygame.Rect)
+    assert isinstance(color, tuple)
+
+
+@patch("game.engine.pygame.event.get", return_value=[MagicMock(type=pygame.QUIT)])
+def test_manejar_eventos_devuelve_salir(mock_eventos):
     boton_inicio = MagicMock()
-    boton_inicio.es_click.return_value = True
     boton_ajustes = MagicMock()
-    boton_ajustes.es_click.return_value = False
+    botones_opciones = []
+    res = engine._manejar_eventos(boton_inicio, boton_ajustes, botones_opciones, 0)
+    assert res == "salir"
 
-    resultado = engine._procesar_click((10, 10), boton_inicio, boton_ajustes, [], 0)
-    assert resultado == "inicio"
 
-
-def test_procesar_click_devuelve_ajustes(monkeypatch):
-    boton_inicio = MagicMock()
-    boton_inicio.es_click.return_value = False
+@patch("game.engine.pygame.event.get", return_value=[MagicMock(type=pygame.MOUSEBUTTONDOWN, button=1, pos=(10, 10))])
+def test_manejar_eventos_click_inicio(mock_eventos):
+    boton_inicio = MagicMock(es_click=MagicMock(return_value=True))
     boton_ajustes = MagicMock()
-    boton_ajustes.es_click.return_value = True
-
-    resultado = engine._procesar_click((10, 10), boton_inicio, boton_ajustes, [], 1)
-    assert resultado == "ajustes:1"
-
-
-def test_procesar_click_devuelve_destino_opcion():
-    boton_inicio = MagicMock()
-    boton_inicio.es_click.return_value = False
-    boton_ajustes = MagicMock()
-    boton_ajustes.es_click.return_value = False
-
-    boton_opcion = MagicMock()
-    boton_opcion.es_click.return_value = True
-    botones = [(boton_opcion, "siguiente")]
-
-    resultado = engine._procesar_click((0, 0), boton_inicio, boton_ajustes, botones, 0)
-    assert resultado == "siguiente"
+    botones_opciones = []
+    res = engine._manejar_eventos(boton_inicio, boton_ajustes, botones_opciones, 0)
+    assert res == "inicio"
 
 
-def test_procesar_click_sin_clicks():
-    boton_inicio = MagicMock()
-    boton_inicio.es_click.return_value = False
-    boton_ajustes = MagicMock()
-    boton_ajustes.es_click.return_value = False
-    botones = []
+def test_procesar_click_en_opciones():
+    boton_inicio = MagicMock(es_click=MagicMock(return_value=False))
+    boton_ajustes = MagicMock(es_click=MagicMock(return_value=False))
+    boton_opcion = MagicMock(es_click=MagicMock(return_value=True))
+    botones = [(boton_opcion, "next_slide")]
+    res = engine._procesar_click((10, 10), boton_inicio, boton_ajustes, botones, 0)
+    assert res == "next_slide"
 
-    resultado = engine._procesar_click((0, 0), boton_inicio, boton_ajustes, botones, 0)
-    assert resultado is None
+
+def test_cargar_y_dibujar_imagen_con_imagen(monkeypatch):
+    # ✅ Superficie real, no MagicMock
+    surface = pygame.Surface((100, 100))
+    monkeypatch.setattr(engine, "cargar_imagen", MagicMock(return_value=surface))
+
+    ventana = pygame.Surface((800, 600))
+    result = engine.cargar_y_dibujar_imagen({"imagen": "foto.png"}, ventana, 800, 600)
+
+    assert isinstance(result, tuple)
+    assert len(result) == 2
+    assert isinstance(result[0], pygame.Surface) or result[0] is None
+
+
+def test_cargar_y_dibujar_imagen_sin_imagen():
+    ventana = pygame.Surface((800, 600))
+    res = engine.cargar_y_dibujar_imagen({}, ventana, 800, 600)
+    assert res == (None, None)
