@@ -110,3 +110,81 @@ def test_mostrar_texto_tipeado_con_fondo_solido_termina_correctamente(monkeypatc
         ventana, fuente, texto, (0, 0, 0), pygame.Rect(0, 0, 400, 200), velocidad=1
     )
     assert resultado is True
+
+
+def test_ajustar_fuente_al_rect_minima_fuente():
+    fuente = pygame.font.SysFont("Arial", 30)
+    rect = pygame.Rect(0, 0, 100, 100)
+    texto = "Texto largo que debería ajustarse"
+    
+    # Llamada a la función que ajusta el texto al rectángulo
+    fuente_ajustada, lineas = render.ajustar_fuente_al_rect(texto, fuente, rect)
+    
+    # Verifica que la altura de la fuente ajustada no exceda la altura del rectángulo
+    assert fuente_ajustada.get_height() <= 30  # La fuente no debe ser mayor que la original
+    
+    # Verifica que el texto se haya dividido en líneas
+    assert len(lineas) > 1  # El texto debería dividirse en más de una línea
+
+
+
+
+def test_ajustar_fuente_al_rect_minima_fuente():
+    fuente = pygame.font.SysFont("Arial", 30)
+    rect = pygame.Rect(0, 0, 100, 100)
+    texto = "Texto largo que debería ajustarse"
+    fuente_ajustada, lineas = render.ajustar_fuente_al_rect(texto, fuente, rect)
+    assert fuente_ajustada.get_height() <= 30  # Verifica que la fuente no es mayor que la original
+    assert len(lineas) > 1  # Asegura que el texto se divide en líneas
+
+
+def test_mostrar_texto_tipeado_con_fondo_solido_termina_correctamente(monkeypatch):
+    ventana = pygame.Surface((400, 200))
+    fuente = pygame.font.SysFont("Arial", 20)
+    texto = "Test rápido"
+    rect = pygame.Rect(0, 0, 400, 200)
+
+    # Simulando que los eventos de salida ocurrieron
+    monkeypatch.setattr(render, "_verificar_salida_eventos", lambda: True)
+    
+    # Mock del tiempo
+    monkeypatch.setattr(pygame, "time", MagicMock(get_ticks=lambda: 1000))
+    
+    # Mock de actualización de pantalla
+    monkeypatch.setattr(pygame.display, "update", lambda *args, **kwargs: None)
+
+    resultado = render.mostrar_texto_tipeado_con_fondo_solido(
+        ventana, fuente, texto, (0, 0, 0), rect, velocidad=50
+    )
+
+    assert resultado is True  # Debería salir inmediatamente debido al evento simulado
+
+
+from src.core.render import ajustar_fuente_al_rect
+
+
+def test_ajustar_fuente_al_rect():
+    # Inicializar Pygame
+    pygame.init()
+
+    # Datos de entrada
+    texto = "Texto largo que debería ajustarse"
+    fuente_inicial = pygame.font.SysFont("Arial", 30)
+    rect = pygame.Rect(0, 0, 100, 100)  # Un rectángulo pequeño para hacer que el texto se ajuste
+
+    # Llamar a la función
+    fuente_ajustada, lineas = ajustar_fuente_al_rect(texto, fuente_inicial, rect)
+
+    # Verificar que la fuente ajustada no sea más grande que el tamaño inicial
+    assert fuente_ajustada.get_height() <= fuente_inicial.get_height(), "La fuente ajustada es mayor a la fuente inicial."
+
+    # Verificar que el texto se divide en más de una línea (dado el tamaño pequeño del rectángulo)
+    assert len(lineas) > 1, "El texto no se dividió en múltiples líneas como se esperaba."
+
+    # Verificar que las líneas no excedan el alto del rectángulo
+    max_alto = rect.height - 20
+    altura_total = len(lineas) * (fuente_ajustada.get_height() + 2)  # Se añade un pequeño margen de 2 píxeles entre líneas
+    assert altura_total <= max_alto, "El texto ajustado excede el alto del rectángulo."
+
+    # Limpiar pygame
+    pygame.quit()

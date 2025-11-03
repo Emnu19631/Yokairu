@@ -18,6 +18,7 @@ SLIDE_5_04 = "slide5-04.jpg"
 SLIDE_5_05 = "slide5-05.jpg"
 SLIDE_5_06 = "slide5-06.jpg"
 SLIDE_5_07 = "slide5-07.jpg"
+LAPI_B_IMAGE = "Lapi_b.png"
 
 # ===============================
 # HISTORIA PRINCIPAL
@@ -275,7 +276,7 @@ HISTORIA = [
             "aunque me gusta su estilo sinceramente, tal vez debería preguntarle algo sobre "
             "este lugar"
         ),
-        "imagen": "Lapi_b.png",
+        "imagen": LAPI_B_IMAGE,
         "scalar": 0.4,
         "pos_rel": (0.35, 0.15)
     },
@@ -286,7 +287,7 @@ HISTORIA = [
         "texto": (
             "Entonces, hay algo que te gustaría saber sobre este lugar?"
         ),
-        "imagen": "Lapi_b.png",
+        "imagen": LAPI_B_IMAGE,
         "scalar": 0.4,
         "pos_rel": (0.35, 0.15)
     },
@@ -297,7 +298,7 @@ HISTORIA = [
         "texto": (
             "Entonces, hay algo que te gustaría saber sobre este lugar?"
         ),
-        "imagen": "Lapi_b.png",
+        "imagen": LAPI_B_IMAGE,
         "scalar": 0.4,
         "pos_rel": (0.35, 0.15)
     },
