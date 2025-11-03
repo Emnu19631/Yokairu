@@ -64,7 +64,7 @@ HISTORIA = [
         "layout": "2x2",
         "opciones": [
             {"texto": "Al pueblo", "next": 4},
-            {"texto": "A la isla", "next": None},
+            {"texto": "A la isla", "next": 18},
             {"texto": "Al prado", "next": None},
             {"texto": "Al volcán", "next": 11},
         ],
