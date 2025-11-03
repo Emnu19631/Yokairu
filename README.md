@@ -34,7 +34,8 @@ yoka/
 │   │   └── save_system.py    # Sistema de guardado y carga de partida
 │   │
 │   └── main.py               # Punto de entrada principal
-│
+├── tests/
+|
 └── README.md
 ```
 
