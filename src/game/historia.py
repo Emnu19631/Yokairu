@@ -291,7 +291,7 @@ HISTORIA = [
         "pos_rel": (0.35, 0.15)
     },
     {
-        "tipo": "eleccion",
+        "tipo": "narracion",
         "fondo": BACKGROUND_ISLA,
         
         "texto": (
@@ -308,7 +308,7 @@ HISTORIA = [
         "scalar": 0.4,
         "pos_rel": (0.35, 0.15),
         "opciones": [
-            {"texto": "Si eres un tiburón, por qué no luces como uno?", "next": 24},
+            {"texto": "No pareces un tiburón", "next": 24},
             {"texto": "Vives en el mar?", "next": 24},
         ],
     },
