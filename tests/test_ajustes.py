@@ -111,3 +111,21 @@ def test_dibujar_pantalla_sin_error():
     pygame.display.quit()
 
 
+@patch("src.ui.ajustes.cargar_imagen", return_value=pygame.Surface((200, 200)))
+@patch("src.ui.ajustes.dibujar_pantalla")
+@patch("pygame.event.get")
+def test_pantalla_ajustes_volver(mock_event_get, mock_dibujar, mock_cargar_imagen):
+    fuente = pygame.font.SysFont("Arial", 20)
+
+    # Simula un solo clic en el botón "Volver"
+    mock_event_get.return_value = [
+        MagicMock(type=pygame.MOUSEBUTTONDOWN, button=1, pos=(0, 0))
+    ]
+
+    # Mock de manejar_evento_click para devolver "volver"
+    with patch("src.ui.ajustes.manejar_evento_click", return_value=("volver", None, None, None, 0.5, False)):
+        resultado = aj.pantalla_ajustes(fuente)
+
+    # Verifica que la función retorna correctamente
+    assert isinstance(resultado, tuple)
+    assert resultado[0] == "volver"

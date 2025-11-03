@@ -1,6 +1,6 @@
-projectKey=Yokairu1
+projectKey=yoka
 serverUrl=http://localhost:9000
-serverVersion=25.9.0.112764
-dashboardUrl=http://localhost:9000/dashboard?id=Yokairu1
-ceTaskId=4308cf61-7568-4db8-a7d8-043551db8924
-ceTaskUrl=http://localhost:9000/api/ce/task?id=4308cf61-7568-4db8-a7d8-043551db8924
+serverVersion=25.8.0.112029
+dashboardUrl=http://localhost:9000/dashboard?id=yoka
+ceTaskId=7a104f3b-1d29-4fb2-937f-b29365e0879d
+ceTaskUrl=http://localhost:9000/api/ce/task?id=7a104f3b-1d29-4fb2-937f-b29365e0879d

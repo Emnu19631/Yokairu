@@ -128,3 +128,39 @@ def test_pantalla_cargar_sale_correctamente(mock_proc, *_):
     fuente = pygame.font.SysFont("Arial", 20)
     result = cg.pantalla_cargar(fuente)
     assert result is None
+
+
+# ========================
+# TEST _dibujar_slots
+# ========================
+
+@patch("src.ui.cargar._obtener_miniatura_para_slot", return_value=pygame.Surface((140, 80)))
+def test_dibujar_slots_dibuja_bien(mock_miniatura):
+    cg.ventana = pygame.display.set_mode((400, 300))
+    cg.ANCHO, cg.ALTO = 400, 300
+    fuente = pygame.font.SysFont("Arial", 20)
+    mouse_pos = (0, 0)
+
+    # Creamos un "save" de prueba con fecha y slide
+    saves = [{"slide": 0, "fecha": "2025-11-02T15:30:00"}]
+
+    botones_slots = cg._dibujar_slots(
+        saves=saves,
+        fuente=fuente,
+        mouse_pos=mouse_pos,
+        limite_superior=50,
+        limite_inferior=250,
+        slot_h=100,
+        espacio_total=120,
+        start_y=60,
+        ancho_slot=300,
+        x_slot=50
+    )
+
+    # Verificamos que se haya creado un botón y devuelto en la lista
+    assert len(botones_slots) == 1
+    boton, slot = botones_slots[0]
+    assert slot["slide"] == 0
+    # Verificamos que el botón tenga un rect dentro de la ventana
+    assert 0 <= boton.rect.x <= cg.ANCHO
+    assert 0 <= boton.rect.y <= cg.ALTO
