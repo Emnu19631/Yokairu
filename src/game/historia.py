@@ -21,6 +21,8 @@ SLIDE_5_04 = "slide5-04.jpg"
 SLIDE_5_05 = "slide5-05.jpg"
 SLIDE_5_06 = "slide5-06.jpg"
 SLIDE_5_07 = "slide5-07.jpg"
+MEIRO_IMG = "Meiro_exe.png"
+MEIROB_IMG = "meirob.png"
 
 # ===============================
 # HISTORIA PRINCIPAL
@@ -181,6 +183,7 @@ HISTORIA = [
             "una chica que por algún motivo se me hacia conocida "
             "aunque probablemente solo era mi imaginacion)"
         ),
+        "next": 27
     },
     #11
     {
@@ -323,8 +326,8 @@ HISTORIA = [
         "scalar": 0.4,
         "pos_rel": (0.35, 0.15),
         "opciones": [
-            {"texto": "No pareces un tiburón", "next": 24},
-            {"texto": "Vives en el mar?", "next": 24},
+            {"texto": "No pareces un tiburón", "next": 25},
+            {"texto": "Vives en el mar?", "next": 23},
         ],
     },
     #23
@@ -352,7 +355,8 @@ HISTORIA = [
         ),
         "imagen": "Lapi_d.png",
         "scalar": 0.4,
-        "pos_rel": (0.35, 0.15)
+        "pos_rel": (0.35, 0.15),
+        "next": 27
     },
     #25
     {
@@ -389,7 +393,7 @@ HISTORIA = [
             "Buenas tardes, soy Meiro Exe, yo fui quien te trajo aquí"
             "se que es muy repentino pero confía en mí, estás a salvo aquí"
         ),
-        "imagen": "Meiro_exe.png",
+        "imagen": MEIRO_IMG,
         "scalar": 0.4,
         "pos_rel": (0.35, 0.15)
     },
@@ -401,7 +405,7 @@ HISTORIA = [
         "texto": (
             "Quiero sabes si quieres irte a casa o quedarte aquí conmigo"
         ),
-        "imagen": "Meiro_exe.png",
+        "imagen": MEIRO_IMG,
         "scalar": 0.4,
         "pos_rel": (0.35, 0.15)
     },
@@ -409,12 +413,12 @@ HISTORIA = [
     {
         "tipo": "eleccion",
         "fondo": BACKGROUND_ESTRELLA,
-        "imagen": "Meiro_exe.png",
+        "imagen": MEIRO_IMG,
         "scalar": 0.4,
         "pos_rel": (0.35, 0.15),
         "opciones": [
-            {"texto": "Quiero ir a casa", "next": 31},
-            {"texto": "Quiero quedarme", "next": None},
+            {"texto": "Quiero ir a casa", "next": 30},
+            {"texto": "Quiero quedarme", "next": 42},
         ],
     },
     #30
@@ -426,9 +430,10 @@ HISTORIA = [
             "Entiendo, si ese es tu deseo, te ayudaré a regresar a casa"
             "Solo confía en mí"
         ),
-        "imagen": "Meiro_exe.png",
+        "imagen": MEIRO_IMG,
         "scalar": 0.4,
-        "pos_rel": (0.35, 0.15)
+        "pos_rel": (0.35, 0.15),
+        "next": 45
     },
     #31
     { "tipo": "narracion",
@@ -448,8 +453,8 @@ HISTORIA = [
             "lentes se me acercó"
         ),
         "imagen": "edrian_silueta.png",
-        "scalar": 0.4,
-        "pos_rel": (0.35, 0.15)
+        "scalar": 0.5,
+        "pos_rel": (0.35, 0.2)
     },
     #33
     {
@@ -461,8 +466,8 @@ HISTORIA = [
             "llegamos aquí, quieres preguntarme algo?"
         ),
         "imagen": "edrian_silueta.png",
-        "scalar": 0.4,
-        "pos_rel": (0.35, 0.15)
+        "scalar": 0.5,
+        "pos_rel": (0.35, 0.2)
     },
     #34
     {
@@ -474,8 +479,8 @@ HISTORIA = [
             "lentes se me acercó"
         ),
         "imagen": "Edrian.png",
-        "scalar": 0.4,
-        "pos_rel": (0.35, 0.15)
+        "scalar": 0.3,
+        "pos_rel": (0.30, 0.1)
     },
     #35
     {
@@ -485,8 +490,8 @@ HISTORIA = [
             "Entonces Edrian, ese es un nombre interesante, veamos, qué podría preguntarle? "
         ),
         "imagen": "Edrian.png",
-        "scalar": 0.4,
-        "pos_rel": (0.35, 0.15)
+        "scalar": 0.3,
+        "pos_rel": (0.30, 0.1)
     },
     #36
     {
@@ -499,7 +504,7 @@ HISTORIA = [
         ),
         "imagen": "meiroc_silueta.png",
         "scalar": 0.4,
-        "pos_rel": (0.35, 0.15)
+        "pos_rel": (0.37, 0.2)
     },
     #37
     {
@@ -510,14 +515,14 @@ HISTORIA = [
             "Porque yo lo quise así querida, simplemente por eso "
             "(Su voz había cambiado, se escuchaba algo distorsionada)"
         ),
-        "imagen": "meirob.png",
-        "scalar": 0.4,
-        "pos_rel": (0.35, 0.15)
+        "imagen": MEIROB_IMG,
+        "scalar": 0.2,
+        "pos_rel": (0.33, 0.2)
     },
     #38
     {
         "tipo": "narracion",
-        "fondo": BACKGROUND_PRADO,
+        "fondo": BACKGROUND_ESTRELLA,
         "texto": (
             "Apareció una chica frente a mi y el lugar cambio, esta chica se veía como la anterior pero "
             "también lucía diferente, me daba algo de miedo sinceramente "
@@ -531,21 +536,21 @@ HISTORIA = [
     #39
     {
         "tipo": "narracion",
-        "fondo": BACKGROUND_PRADO,
+        "fondo": BACKGROUND_ESTRELLA,
         "texto": (
             "Oh vamos, no tienes porque ponerte asi, despues de todo vas a terminar "
             "olvidando tu vida y pensarás que siempre has vivido aquí, en unos días eso "
             "pasara, por ahora, te deseo suerte buscando una salida aunque se que no la "
             "encontraras pero será divertido verte intentarlo"
         ),
-        "imagen": "Meiro_exe.png",
+        "imagen": MEIRO_IMG,
         "scalar": 0.4,
         "pos_rel": (0.35, 0.15)
     },
     #40
     {
         "tipo": "narracion",
-        "fondo": BACKGROUND_JUEGO,
+        "fondo": BACKGROUND_ESTRELLA,
         "texto": (
             "Rayco, sabia que vendrias, y ella, supuse que llegaría a mi tarde o temprano, ahora  "
             "dime, quieres irte de este lugar, no es así? oh, pero que maleducada soy, me llamo "
@@ -553,12 +558,12 @@ HISTORIA = [
         ),
         "imagen": "meiroc_silueta.png",
         "scalar": 0.4,
-        "pos_rel": (0.35, 0.15)
+        "pos_rel": (0.37, 0.2)
     },
     #41
     {
         "tipo": "narracion",
-        "fondo": BACKGROUND_JUEGO,
+        "fondo": BACKGROUND_ESTRELLA,
         "texto": (
             "Rayco, veo que traes a una pequeña que quiere irse a su casa, bueno, dejame "
             "decir que eso no se puede, no lo pienso permitir, te quedaras aquí igual que "
@@ -566,8 +571,9 @@ HISTORIA = [
             "oh vamos, no pongas esa cara, esta aventura será divertida"
         ),
         "imagen": "meiroc.png",
-        "scalar": 0.4,
-        "pos_rel": (0.35, 0.15)
+        "scalar": 0.6,
+        "pos_rel": (0.37, 0.2),
+        "next": 45
     },
     #42
     {
@@ -577,9 +583,10 @@ HISTORIA = [
             "Me alegro de que quieras quedarte aquí! Rayco te mostrará  "
             "qué más puedes dominar, buena suerte"
         ),
-        "imagen": "meirob.png",
-        "scalar": 0.4,
-        "pos_rel": (0.35, 0.15)
+        "imagen": MEIROB_IMG,
+        "scalar": 0.2,
+        "pos_rel": (0.35, 0.2),
+        "next": 45
     },
     #43
     {
@@ -591,7 +598,7 @@ HISTORIA = [
             "lugar así que te quedaras aqui y seras parte de mi diversión junto a los"
             "otros y no intentes protestar o escapar….."
         ),
-        "imagen": "meirob.png",
+        "imagen": MEIROB_IMG,
         "scalar": 0.4,
         "pos_rel": (0.35, 0.15)
     },
