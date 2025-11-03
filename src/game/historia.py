@@ -11,6 +11,9 @@ BACKGROUND_JUEGO = "background_juego.jpg"
 BACKGROUND_VOLCAN = "background_volcan.png"
 BACKGROUND_NEGRO= "background_negro.jpg"
 BACKGROUND_ISLA="background_isla.png"
+BACKGROUND_PRADO="fondo_prado.png"
+BACKGROUND_ESTRELLA="fondo_estrella.png"
+BACKGROUND_FINAL="fondo_fin.png"
 SLIDE_5_01 = "slide5-01.jpg"
 SLIDE_5_02 = "slide5-02.jpg"
 SLIDE_5_03 = "slide5-03.jpg"
@@ -18,13 +21,13 @@ SLIDE_5_04 = "slide5-04.jpg"
 SLIDE_5_05 = "slide5-05.jpg"
 SLIDE_5_06 = "slide5-06.jpg"
 SLIDE_5_07 = "slide5-07.jpg"
-LAPI_B_IMAGE = "Lapi_b.png"
 
 # ===============================
 # HISTORIA PRINCIPAL
 # ===============================
 
 HISTORIA = [
+    #0
     {
         "tipo": "narracion",
         "fondo": BACKGROUND_JUEGO,
@@ -36,6 +39,7 @@ HISTORIA = [
         "scalar": 0.25,
         "pos_rel": (0.13, 0.05)
     },
+    #1
     {
         "tipo": "eleccion",
         "fondo": BACKGROUND_JUEGO,
@@ -48,6 +52,7 @@ HISTORIA = [
             {"texto": "Mujer", "next": 2},
         ],
     },
+    #2
     {
         "tipo": "narracion",
         "fondo": BACKGROUND_JUEGO,
@@ -58,6 +63,7 @@ HISTORIA = [
             "Tal vez, para empezar, sería buena idea pedir ayuda o preguntar algunas cosas."
         ),
     },
+    #3
     {
         "tipo": "eleccion",
         "fondo": BACKGROUND_JUEGO,
@@ -66,10 +72,11 @@ HISTORIA = [
         "opciones": [
             {"texto": "Al pueblo", "next": 4},
             {"texto": "A la isla", "next": 18},
-            {"texto": "Al prado", "next": None},
+            {"texto": "Al prado", "next": 32},
             {"texto": "Al volcán", "next": 11},
         ],
     },
+    #4
     {
         "tipo": "narracion",
         "fondo": BACKGROUND_JUEGO,
@@ -85,6 +92,7 @@ HISTORIA = [
             "tal vez él estaba a cargo."
         )
     },
+    #5
     {
         "tipo": "narracion",
         "fondo": BACKGROUND_JUEGO,
@@ -98,6 +106,7 @@ HISTORIA = [
         "scalar": 0.4,
         "pos_rel": (0.35, 0.15)
     },
+    #6
     {
         "tipo": "eleccion",
         "fondo": BACKGROUND_JUEGO,
@@ -117,6 +126,7 @@ HISTORIA = [
             {"texto": "¿Cómo regreso a mi casa?", "next": 9},
         ],
     },
+    #7
     {
         "tipo": "narracion",
         "fondo": BACKGROUND_JUEGO,
@@ -130,6 +140,7 @@ HISTORIA = [
         "scalar": 0.4,
         "pos_rel": (0.35, 0.15)
     },
+    #8
     {
         "tipo": "narracion",
         "fondo": BACKGROUND_JUEGO,
@@ -144,6 +155,7 @@ HISTORIA = [
         "pos_rel": (0.35, 0.15),
         "next": 10
     },
+    #9
     {
         "tipo": "narracion",
         "fondo": BACKGROUND_JUEGO,
@@ -160,6 +172,7 @@ HISTORIA = [
         "scalar": 0.4,
         "pos_rel": (0.35, 0.15)
     },
+    #10
     {
         "tipo": "narracion",
         "fondo": BACKGROUND_JUEGO,
@@ -169,6 +182,7 @@ HISTORIA = [
             "aunque probablemente solo era mi imaginacion)"
         ),
     },
+    #11
     {
         "tipo": "narracion",
         "fondo": BACKGROUND_JUEGO,
@@ -179,6 +193,7 @@ HISTORIA = [
             "puedo encontrar "
         )
     },
+    #12
     {
         "tipo": "narracion",
         "fondo": BACKGROUND_VOLCAN,
@@ -190,6 +205,7 @@ HISTORIA = [
             "hacerlo……"
         ),
     },
+    #13
     {
         "tipo": "narracion",
         "fondo": BACKGROUND_NEGRO,
@@ -203,6 +219,7 @@ HISTORIA = [
         "scalar": 0.4,
         "pos_rel": (0.35, 0.15)
     },
+    #14
     {
         "tipo": "narracion",
         "fondo": BACKGROUND_JUEGO,
@@ -216,6 +233,7 @@ HISTORIA = [
             "mismo se veía distinto"
         ),
     },
+    #15
     {
         "tipo": "narracion",
         "fondo": BACKGROUND_JUEGO,
@@ -225,6 +243,7 @@ HISTORIA = [
             "o la isla"
         ),
     },
+    #16
     {
         "tipo": "narracion",
         "fondo": BACKGROUND_JUEGO,
@@ -232,6 +251,7 @@ HISTORIA = [
             "Entonces, a dónde iré ahora?"
         ),
     },
+    #17
     {
         "tipo": "eleccion",
         "fondo": BACKGROUND_JUEGO,
@@ -240,9 +260,10 @@ HISTORIA = [
         "opciones": [
             {"texto": "Al pueblo", "next": 4},
             {"texto": "A la isla", "next": 18},
-            {"texto": "Al prado", "next": None},
+            {"texto": "Al prado", "next": 32},
         ],
     },
+    #18
     { "tipo": "narracion",
         "fondo": BACKGROUND_ISLA,
         
@@ -253,6 +274,7 @@ HISTORIA = [
             "era hombre o mujer"
         ),
     },
+    #19
     {
         "tipo": "narracion",
         "fondo": BACKGROUND_ISLA,
@@ -266,6 +288,7 @@ HISTORIA = [
         "scalar": 0.4,
         "pos_rel": (0.35, 0.15)
     },
+    #20
     {
         "tipo": "narracion",
         "fondo": BACKGROUND_ISLA,
@@ -276,10 +299,11 @@ HISTORIA = [
             "aunque me gusta su estilo sinceramente, tal vez debería preguntarle algo sobre "
             "este lugar"
         ),
-        "imagen": LAPI_B_IMAGE,
+        "imagen": "Lapi_b.png",
         "scalar": 0.4,
         "pos_rel": (0.35, 0.15)
     },
+    #21
     {
         "tipo": "narracion",
         "fondo": BACKGROUND_ISLA,
@@ -287,21 +311,11 @@ HISTORIA = [
         "texto": (
             "Entonces, hay algo que te gustaría saber sobre este lugar?"
         ),
-        "imagen": LAPI_B_IMAGE,
+        "imagen": "Lapi_b.png",
         "scalar": 0.4,
         "pos_rel": (0.35, 0.15)
     },
-    {
-        "tipo": "narracion",
-        "fondo": BACKGROUND_ISLA,
-        
-        "texto": (
-            "Entonces, hay algo que te gustaría saber sobre este lugar?"
-        ),
-        "imagen": LAPI_B_IMAGE,
-        "scalar": 0.4,
-        "pos_rel": (0.35, 0.15)
-    },
+    #22
     {
         "tipo": "eleccion",
         "fondo": BACKGROUND_ISLA,
@@ -313,6 +327,7 @@ HISTORIA = [
             {"texto": "Vives en el mar?", "next": 24},
         ],
     },
+    #23
     {
         "tipo": "narracion",
         "fondo": BACKGROUND_ISLA,
@@ -325,6 +340,7 @@ HISTORIA = [
         "scalar": 0.4,
         "pos_rel": (0.35, 0.15)
     },
+    #24
     {
         "tipo": "narracion",
         "fondo": BACKGROUND_ISLA,
@@ -338,6 +354,7 @@ HISTORIA = [
         "scalar": 0.4,
         "pos_rel": (0.35, 0.15)
     },
+    #25
     {
         "tipo": "narracion",
         "fondo": BACKGROUND_ISLA,
@@ -349,5 +366,254 @@ HISTORIA = [
         "imagen": "Lapi_e.png",
         "scalar": 0.4,
         "pos_rel": (0.35, 0.15)
+    },
+    #26
+    {
+        "tipo": "narracion",
+        "fondo": BACKGROUND_ISLA,
+        
+        "texto": (
+            "Te presentare a alguien muy especial para mí"
+            "Sigueme!!!"
+        ),
+        "imagen": "Lapi_e.png",
+        "scalar": 0.4,
+        "pos_rel": (0.35, 0.15)
+    },
+    #27
+    {
+        "tipo": "narracion",
+        "fondo": BACKGROUND_ESTRELLA,
+        
+        "texto": (
+            "Buenas tardes, soy Meiro Exe, yo fui quien te trajo aquí"
+            "se que es muy repentino pero confía en mí, estás a salvo aquí"
+        ),
+        "imagen": "Meiro_exe.png",
+        "scalar": 0.4,
+        "pos_rel": (0.35, 0.15)
+    },
+    #28
+    {
+        "tipo": "narracion",
+        "fondo": BACKGROUND_ESTRELLA,
+        
+        "texto": (
+            "Quiero sabes si quieres irte a casa o quedarte aquí conmigo"
+        ),
+        "imagen": "Meiro_exe.png",
+        "scalar": 0.4,
+        "pos_rel": (0.35, 0.15)
+    },
+    #29
+    {
+        "tipo": "eleccion",
+        "fondo": BACKGROUND_ESTRELLA,
+        "imagen": "Meiro_exe.png",
+        "scalar": 0.4,
+        "pos_rel": (0.35, 0.15),
+        "opciones": [
+            {"texto": "Quiero ir a casa", "next": 31},
+            {"texto": "Quiero quedarme", "next": None},
+        ],
+    },
+    #30
+    {
+        "tipo": "narracion",
+        "fondo": BACKGROUND_ESTRELLA,
+        
+        "texto": (
+            "Entiendo, si ese es tu deseo, te ayudaré a regresar a casa"
+            "Solo confía en mí"
+        ),
+        "imagen": "Meiro_exe.png",
+        "scalar": 0.4,
+        "pos_rel": (0.35, 0.15)
+    },
+    #31
+    { "tipo": "narracion",
+        "fondo": BACKGROUND_FINAL,
+        
+        "texto": (
+            ".  "
+        ),
+    },
+    #32
+    {
+        "tipo": "narracion",
+        "fondo": BACKGROUND_PRADO,
+        "texto": (
+            "El prado se veía lindo ademas de que por lo visto corría una brisa agradable  "
+            "en el mismo por lo que decidí ir allá, mientras exploraba un poco un chico de"
+            "lentes se me acercó"
+        ),
+        "imagen": "edrian_silueta.png",
+        "scalar": 0.4,
+        "pos_rel": (0.35, 0.15)
+    },
+    #33
+    {
+        "tipo": "narracion",
+        "fondo": BACKGROUND_PRADO,
+        "texto": (
+            "Hola, veo que eres nueva por aqui, me llamo Edrian y por lo visto estas "
+            "demasiado confundida, descuida, a todos nos paso lo mismo cuando "
+            "llegamos aquí, quieres preguntarme algo?"
+        ),
+        "imagen": "edrian_silueta.png",
+        "scalar": 0.4,
+        "pos_rel": (0.35, 0.15)
+    },
+    #34
+    {
+        "tipo": "narracion",
+        "fondo": BACKGROUND_PRADO,
+        "texto": (
+            "El prado se veía lindo ademas de que por lo visto corría una brisa agradable  "
+            "en el mismo por lo que decidí ir allá, mientras exploraba un poco un chico de"
+            "lentes se me acercó"
+        ),
+        "imagen": "Edrian.png",
+        "scalar": 0.4,
+        "pos_rel": (0.35, 0.15)
+    },
+    #35
+    {
+        "tipo": "narracion",
+        "fondo": BACKGROUND_PRADO,
+        "texto": (
+            "Entonces Edrian, ese es un nombre interesante, veamos, qué podría preguntarle? "
+        ),
+        "imagen": "Edrian.png",
+        "scalar": 0.4,
+        "pos_rel": (0.35, 0.15)
+    },
+    #36
+    {
+        "tipo": "narracion",
+        "fondo": BACKGROUND_PRADO,
+        "texto": (
+            "Lapi, es bueno verte aunque sabia que vendrias, en fin, ella debe ser la nueva, "
+            "es un placer, me llamo Meiro y te contaré algunas cosas sobre este lugar que "
+            "podrían serte de ayuda más adelante, empecemos, si?"
+        ),
+        "imagen": "meiroc_silueta.png",
+        "scalar": 0.4,
+        "pos_rel": (0.35, 0.15)
+    },
+    #37
+    {
+        "tipo": "narracion",
+        "fondo": BACKGROUND_PRADO,
+        "texto": (
+            "Para empezar, el motivo por el que estás aquí es porque……  "
+            "Porque yo lo quise así querida, simplemente por eso "
+            "(Su voz había cambiado, se escuchaba algo distorsionada)"
+        ),
+        "imagen": "meirob.png",
+        "scalar": 0.4,
+        "pos_rel": (0.35, 0.15)
+    },
+    #38
+    {
+        "tipo": "narracion",
+        "fondo": BACKGROUND_PRADO,
+        "texto": (
+            "Apareció una chica frente a mi y el lugar cambio, esta chica se veía como la anterior pero "
+            "también lucía diferente, me daba algo de miedo sinceramente "
+            "Bueno, como dije, estás aquí porque yo quiero que estes aqui y no podrás irte a ninguna "
+            "parte, ahora eres mi nueva diversión, yo soy Meiro.exe por cierto"
+        ),
+        "imagen": "Meiro_exe_silueta.png",
+        "scalar": 0.4,
+        "pos_rel": (0.35, 0.15)
+    },
+    #39
+    {
+        "tipo": "narracion",
+        "fondo": BACKGROUND_PRADO,
+        "texto": (
+            "Oh vamos, no tienes porque ponerte asi, despues de todo vas a terminar "
+            "olvidando tu vida y pensarás que siempre has vivido aquí, en unos días eso "
+            "pasara, por ahora, te deseo suerte buscando una salida aunque se que no la "
+            "encontraras pero será divertido verte intentarlo"
+        ),
+        "imagen": "Meiro_exe.png",
+        "scalar": 0.4,
+        "pos_rel": (0.35, 0.15)
+    },
+    #40
+    {
+        "tipo": "narracion",
+        "fondo": BACKGROUND_JUEGO,
+        "texto": (
+            "Rayco, sabia que vendrias, y ella, supuse que llegaría a mi tarde o temprano, ahora  "
+            "dime, quieres irte de este lugar, no es así? oh, pero que maleducada soy, me llamo "
+            "Meiro, en cuanto a mi pregunta, dime, quieres regresar a casa"
+        ),
+        "imagen": "meiroc_silueta.png",
+        "scalar": 0.4,
+        "pos_rel": (0.35, 0.15)
+    },
+    #41
+    {
+        "tipo": "narracion",
+        "fondo": BACKGROUND_JUEGO,
+        "texto": (
+            "Rayco, veo que traes a una pequeña que quiere irse a su casa, bueno, dejame "
+            "decir que eso no se puede, no lo pienso permitir, te quedaras aquí igual que "
+            "todos los demás, descuida, con el tiempo vas a olvidar quién fuiste y tu “hogar”,"
+            "oh vamos, no pongas esa cara, esta aventura será divertida"
+        ),
+        "imagen": "meiroc.png",
+        "scalar": 0.4,
+        "pos_rel": (0.35, 0.15)
+    },
+    #42
+    {
+        "tipo": "narracion",
+        "fondo": BACKGROUND_JUEGO,
+        "texto": (
+            "Me alegro de que quieras quedarte aquí! Rayco te mostrará  "
+            "qué más puedes dominar, buena suerte"
+        ),
+        "imagen": "meirob.png",
+        "scalar": 0.4,
+        "pos_rel": (0.35, 0.15)
+    },
+    #43
+    {
+        "tipo": "narracion",
+        "fondo": BACKGROUND_JUEGO,
+        "texto": (
+            "Con que quieres irte, bueno, dejame decirte algo, no puedes irte si yo no  "
+            "quiero que te vayas y no te dejaré escapar, verás, es muy aburrido este"
+            "lugar así que te quedaras aqui y seras parte de mi diversión junto a los"
+            "otros y no intentes protestar o escapar….."
+        ),
+        "imagen": "meirob.png",
+        "scalar": 0.4,
+        "pos_rel": (0.35, 0.15)
+    },
+    #44
+    {
+        "tipo": "narracion",
+        "fondo": BACKGROUND_JUEGO,
+        "transicion_fondos": [
+            SLIDE_5_01, SLIDE_5_02, SLIDE_5_03,
+            SLIDE_5_04, SLIDE_5_05, SLIDE_5_06, SLIDE_5_07
+        ],
+        "texto": (
+            "Te lo diré de una manera muy sencilla para que tu pequeña cabecita  "
+            "humana logre entenderlo, ahora podras salir de aqui"
+        ),
+    },
+    #45
+    {
+        "tipo": "narracion",
+        "fondo": BACKGROUND_FINAL,
+        "texto": (
+            "."
+        ),
     },
 ]
